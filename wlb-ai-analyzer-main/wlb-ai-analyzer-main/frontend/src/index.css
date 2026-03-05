@@ -1,0 +1,23 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full screen layout */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Base styling */
+body {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  background: #020617;
+}
+
+/* Remove default button styles */
+button {
+  font-family: inherit;
+}
