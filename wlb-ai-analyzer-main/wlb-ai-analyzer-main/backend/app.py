@@ -9,7 +9,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from typing import Optional
 
-
 # ================= FASTAPI APP =================
 
 app = FastAPI()
@@ -22,14 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # ================= LOAD MODEL =================
 
-model = joblib.load(r"C:\Users\HP\Desktop\React\wlb-analyser-main(ollama)\wlb-ai-analyzer-main\wlb-ai-analyzer-main\backend\model.pkl")
-columns = joblib.load(r"C:\Users\HP\Desktop\React\wlb-analyser-main(ollama)\wlb-ai-analyzer-main\wlb-ai-analyzer-main\backend\columns.pkl")
+model = joblib.load(
+    r"C:\Users\HP\Desktop\React\wlb-analyser-main(ollama)\wlb-ai-analyzer-main\wlb-ai-analyzer-main\backend\model.pkl")
+columns = joblib.load(
+    r"C:\Users\HP\Desktop\React\wlb-analyser-main(ollama)\wlb-ai-analyzer-main\wlb-ai-analyzer-main\backend\columns.pkl")
 
 columns = [col for col in columns if col != "Timestamp"]
-
 
 # ================= OLLAMA SETTINGS =================
 
@@ -64,7 +63,6 @@ def get_columns():
 
 @app.post("/predict")
 def predict(data: UserInput):
-
     # extract numeric values from features
     values = []
 
@@ -106,12 +104,11 @@ def predict(data: UserInput):
 
 @app.post("/ai-report")
 def ai_report(data: AIRequest):
-
     latest = data.latest
     previous = data.previous
 
     prompt = f"""
-    
+
 You are a thoughtful, emotionally intelligent wellness coach speaking to a college student.
 
 Respond in plain text only.
@@ -131,16 +128,16 @@ Analyze everything carefully and provide:
 6. Encourage them in a warm, supportive tone.
 
 Be detailed but natural. Avoid generic phrases.
-    
+
     Latest Score: {latest.get("score")}
     Previous Score: {previous.get("score") if previous else "None"}
-    
+
     Latest Inputs:
     {latest.get("inputs")}
-    
+
     Previous Inputs:
     {previous.get("inputs") if previous else "None"}
-    
+
     Provide practical advice.
     """
 
